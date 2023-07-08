@@ -9,10 +9,9 @@ import useStyles from "./styles";
 
 import { useDispatch } from "react-redux";
 import { getPosts } from "./actions/posts";
-import { devNull } from "os";
 
 function App() {
-  const [currentId, setCurrentId] = useState(devNull);
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
