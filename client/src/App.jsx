@@ -1,16 +1,19 @@
 import { Container } from "@material-ui/core";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home.jsx";
+import Auth from "./components/Auth/Auth";
 
 function App() {
   return (
     <BrowserRouter>
       <Container maxwidth="lg">
         <Navbar />
-        <Home />
+        <Switch>
+          <Route path="/" index component={Home} />
+          <Route path="/auth" index component={Auth} />
+        </Switch>
       </Container>
     </BrowserRouter>
   );
