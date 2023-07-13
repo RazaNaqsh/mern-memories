@@ -1,4 +1,4 @@
-import { Avatar, Container, Paper, Typography } from "@material-ui/core";
+import { Avatar, Container, Grid, Paper, Typography } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
@@ -9,6 +9,10 @@ const Auth = () => {
   const isSignup = false;
 
   const handleSubmit = () => {};
+  const handleChange = () => {};
+  const handleShowPassword = () => {};
+
+  const showPassword = true;
 
   return (
     <Container component="main" maxWidth="xs">
