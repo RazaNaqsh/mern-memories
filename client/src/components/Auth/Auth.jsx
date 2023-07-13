@@ -1,18 +1,26 @@
-import { Avatar, Container, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Container,
+  Grid,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./styles";
 import Input from "./Input";
+import { useState } from "react";
 
 const Auth = () => {
   const classes = useStyles();
 
-  const isSignup = false;
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSignup, SetIsSignUp] = useState(false);
 
   const handleSubmit = () => {};
   const handleChange = () => {};
-  const handleShowPassword = () => {};
-
-  const showPassword = true;
+  const handleShowPassword = () => setShowPassword((prev) => !prev);
+  const switchMode = () => SetIsSignUp((prev) => !prev);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,6 +69,24 @@ const Auth = () => {
                 type="password"
               />
             )}
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            {isSignup ? "Sign Up" : "Sign In"}
+          </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Button onClick={switchMode}>
+                {isSignup
+                  ? "Already have an account? Sign in"
+                  : "Don't have an account? Sign Up"}
+              </Button>
+            </Grid>
           </Grid>
         </form>
       </Paper>
