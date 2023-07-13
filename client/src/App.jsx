@@ -11,8 +11,8 @@ function App() {
       <Container maxwidth="lg">
         <Navbar />
         <Switch>
-          <Route path="/" index component={Home} />
-          <Route path="/auth" index component={Auth} />
+          <Route path="/" exact component={Home} />
+          <Route path="/auth" exact component={Auth} />
         </Switch>
       </Container>
     </BrowserRouter>
