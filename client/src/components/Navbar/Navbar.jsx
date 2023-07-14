@@ -3,20 +3,29 @@ import memories from "../../assets/memories.png";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   console.log(user);
 
-  useEffect(() => {
-    const token = user?.token;
+  // useEffect(() => {
+  //   const token = user?.token;
 
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, []);
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, []);
 
-  const logout = () => {};
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+
+    history.push("/");
+    setUser(null);
+  };
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
