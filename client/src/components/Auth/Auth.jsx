@@ -16,11 +16,12 @@ import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-import { AUTH } from "../../constants/actionTypes";
+import { useHistory } from "react-router-dom";
 
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, SetIsSignUp] = useState(false);
@@ -35,7 +36,9 @@ const Auth = () => {
     const token = res.credential;
 
     try {
-      dispatch({ type: AUTH, data: { result, token } });
+      dispatch({ type: "AUTH", data: { result, token } });
+
+      history.push("/");
     } catch (err) {
       console.log(err);
     }
