@@ -18,6 +18,16 @@ import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { signin, signup } from "../../actions/auth.js";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
+
 const Auth = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -26,9 +36,24 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, SetIsSignUp] = useState(false);
 
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const [formData, setFormData] = useState(initialState);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleShowPassword = () => setShowPassword((prev) => !prev);
+
   const switchMode = () => SetIsSignUp((prev) => !prev);
 
   const googleSuccess = (res) => {
