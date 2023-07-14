@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import User from "../models/user.js";
 
-export const singin = async (req, res) => {
+export const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
