@@ -13,10 +13,14 @@ import useStyles from "./styles";
 import Input from "./Input";
 import { useState } from "react";
 
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, SetIsSignUp] = useState(false);
@@ -25,6 +29,17 @@ const Auth = () => {
   const handleChange = () => {};
   const handleShowPassword = () => setShowPassword((prev) => !prev);
   const switchMode = () => SetIsSignUp((prev) => !prev);
+
+  const googleSuccess = (res) => {
+    const result = jwt_decode(res?.credential);
+    const token = res.credential;
+
+    try {
+      dispatch({ type: AUTH, data: { result, token } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -84,22 +99,14 @@ const Auth = () => {
           >
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
+
           <GoogleLogin
-            clientId="Google ID"
-            render={(renderProps) => (
-              <Button
-                className={classes.googleButton}
-                color="primary"
-                fullWidth
-                onClick={renderProps.onClick}
-                disabled={renderProps.disabled}
-                startIcon={<Icon />}
-                variant="contained"
-              >
-                Google Sign In
-              </Button>
-            )}
+            onSuccess={googleSuccess}
+            onError={() => {
+              console.log("loginFailed");
+            }}
           />
+
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
