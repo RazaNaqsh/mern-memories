@@ -16,7 +16,9 @@ const auth = async (req, res, next) => {
       req.userId = decodedData?.sub;
     }
     next();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default auth;
