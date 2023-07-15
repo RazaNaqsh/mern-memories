@@ -23,7 +23,7 @@ const Post = ({ post, setCurrentId }) => {
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
-        (like) => like === (user?.result?.jti || user?.result?._id)
+        (like) => like === (user?.result?.sub || user?.result?._id)
       ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
@@ -100,6 +100,7 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />{" "}
         </Button>
+        {user?.result?.sub === post?.creator}
         <Button
           size="small"
           color="primary"
