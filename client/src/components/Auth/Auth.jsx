@@ -54,7 +54,10 @@ const Auth = () => {
 
   const handleShowPassword = () => setShowPassword((prev) => !prev);
 
-  const switchMode = () => SetIsSignUp((prev) => !prev);
+  const switchMode = () => {
+    SetIsSignUp((prev) => !prev);
+    setShowPassword(false);
+  };
 
   const googleSuccess = (res) => {
     const result = jwt_decode(res?.credential);
