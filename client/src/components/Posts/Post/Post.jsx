@@ -23,7 +23,7 @@ const Post = ({ post, setCurrentId }) => {
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
-        (like) => like === (user?.result?.googleId || user?.result?._id)
+        (like) => like === (user?.result?.jti || user?.result?._id)
       ) ? (
         <>
           <ThumbUpAltIcon fontSize="small" />
@@ -95,6 +95,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
+          disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
           <Likes />{" "}
